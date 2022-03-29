@@ -1,8 +1,11 @@
 {
-  "name": "lpdf",
+  "name": "@olafr/lpdf",
   "version": "1.0.0",
-  "description": "",
+  "description": "LPDF is a simple, lightweight PDF reader UI suitable for tablet use.",
   "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "test": "npm run build",
     "build": "npm-run-all sass minCSS minJS eslint",
@@ -18,9 +21,17 @@
     "del": "node -e \"require('fs').rm('node_modules', { recursive: true }, () => { console.log('node_modules is deleted!'); });\"",
     "watchCSS": "watch \"echo ------------------- && sass --no-source-map scss\\build:css && echo done\" ./scss"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Olafr9500/LPDF.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Olafr9500/LPDF/issues"
+  },
+  "homepage": "https://github.com/Olafr9500/LPDF#readme",
   "devDependencies": {
     "eslint": "^8.10.0",
     "minify": "^8.0.4",
