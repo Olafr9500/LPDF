@@ -1,0 +1,34 @@
+{
+  "name": "lpdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run build",
+    "build": "npm-run-all sass minCSS minJS eslint",
+    "buildCSS": "npm-run-all sass minCSS",
+    "buildJS": "npm-run-all minJS eslint",
+    "sass": "sass --no-source-map scss\\build:css",
+    "minify": "npm-run-all minCSS minJS",
+    "minCSS": "cd css && minify main.css > main.min.css",
+    "minJS": "minify index.js > index.min.js",
+    "eslint": "eslint --fix index.js index.min.js",
+    "production": "npm install && npm run build && npm run del && npm install --production",
+    "development": "npm install",
+    "del": "node -e \"require('fs').rm('node_modules', { recursive: true }, () => { console.log('node_modules is deleted!'); });\"",
+    "watchCSS": "watch \"echo ------------------- && sass --no-source-map scss\\build:css && echo done\" ./scss"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "minify": "^8.0.4",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.49.9"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "bootstrap-icons": "^1.8.1"
+  }
+}

@@ -1,0 +1,301 @@
+@import "../../node_modules/bootstrap/scss/_functions.scss";
+@import "../../node_modules/bootstrap/scss/_variables.scss";
+@import "../../node_modules/bootstrap/scss/_mixins.scss";
+
+.lpdf {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: $zindex-modal;
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+}
+
+.dialog-lpdf {
+    position: relative;
+    width: 100vw;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+    pointer-events: none;
+
+    .lpdf.fade & {
+        @include transition($modal-transition);
+        transform: $modal-fade-transform;
+    }
+    .lpdf.show & {
+        transform: $modal-show-transform;
+    }
+}
+
+.content-lpdf {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: $modal-content-color;
+    pointer-events: auto;
+    outline: 0;
+    max-height: 100%;
+    overflow: hidden;
+    height: 100%;
+}
+
+.header-lpdf {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+}
+
+.body-lpdf {
+    position: relative;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    display: grid;
+    background-color: $gray-700;
+}
+
+.body-lpdf > canvas {
+    margin: 5px auto;
+    width: 85%;
+}
+
+.buttons-right {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: auto;
+    width: auto;
+}
+
+.buttons-navigation {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-lpdf {
+    display: inline-block;
+    font-family: $btn-font-family;
+    font-weight: $btn-font-weight;
+    line-height: $btn-line-height;
+    color: $body-color;
+    text-align: center;
+    text-decoration: if($link-decoration == none, null, none);
+    white-space: $btn-white-space;
+    vertical-align: middle;
+    cursor: if($enable-button-pointers, pointer, null);
+    user-select: none;
+    background-color: transparent;
+    border: $btn-border-width solid transparent;
+    @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-border-radius);
+    @include transition($btn-transition);
+
+    &:hover {
+        color: $body-color;
+        text-decoration: if($link-hover-decoration == underline, none, null);
+    }
+
+    .btn-check:focus + &,
+    &:focus {
+        outline: 0;
+        box-shadow: $btn-focus-box-shadow;
+    }
+
+    .btn-check:checked + &,
+    .btn-check:active + &,
+    &:active,
+    &.active {
+        @include box-shadow($btn-active-box-shadow);
+        &:focus {
+            @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
+        }
+    }
+
+    &:disabled,
+    &.disabled,
+    fieldset:disabled & {
+        pointer-events: none;
+        opacity: $btn-disabled-opacity;
+        @include box-shadow(none);
+    }
+
+    @include button-variant($secondary, $secondary);
+
+    @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-border-radius-lg);
+}
+
+.input-group-lpdf {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: auto;
+
+    > .form-control-lpdf {
+        position: relative;
+        flex: 1 1 auto;
+        width: 1%;
+        min-width: 0;
+    }
+
+    > .form-control-lpdf:focus {
+        z-index: 3;
+    }
+}
+
+.input-group-text-lpdf {
+    display: flex;
+    align-items: center;
+    padding: $input-group-addon-padding-y $input-group-addon-padding-x;
+    @include font-size($input-font-size); // Match inputs
+    font-weight: $input-group-addon-font-weight;
+    line-height: $input-line-height;
+    color: $input-group-addon-color;
+    text-align: center;
+    white-space: nowrap;
+    background-color: $input-group-addon-bg;
+    border: $input-border-width solid $input-group-addon-border-color;
+    @include border-radius($input-border-radius);
+}
+
+.form-control-lpdf {
+    display: block;
+    width: 100%;
+    padding: $input-padding-y $input-padding-x;
+    font-family: $input-font-family;
+    @include font-size($input-font-size);
+    font-weight: $input-font-weight;
+    line-height: $input-line-height;
+    color: $input-color;
+    background-color: $input-bg;
+    background-clip: padding-box;
+    border: $input-border-width solid $input-border-color;
+    appearance: none;
+
+    @include border-radius($input-border-radius, 0);
+
+    @include box-shadow($input-box-shadow);
+    @include transition($input-transition);
+
+    &[type="file"] {
+        overflow: hidden;
+
+        &:not(:disabled):not([readonly]) {
+            cursor: pointer;
+        }
+    }
+
+    &:focus {
+        color: $input-focus-color;
+        background-color: $input-focus-bg;
+        border-color: $input-focus-border-color;
+        outline: 0;
+        @if $enable-shadows {
+            @include box-shadow($input-box-shadow, $input-focus-box-shadow);
+        } @else {
+            box-shadow: $input-focus-box-shadow;
+        }
+    }
+
+    &::-webkit-date-and-time-value {
+        height: if(unit($input-line-height) == "", $input-line-height * 1em, $input-line-height);
+    }
+
+    &::placeholder {
+        color: $input-placeholder-color;
+        opacity: 1;
+    }
+
+    &:disabled,
+    &[readonly] {
+        background-color: $input-disabled-bg;
+        border-color: $input-disabled-border-color;
+        opacity: 1;
+    }
+
+    &::file-selector-button {
+        padding: $input-padding-y $input-padding-x;
+        margin: (-$input-padding-y) (-$input-padding-x);
+        margin-inline-end: $input-padding-x;
+        color: $form-file-button-color;
+        @include gradient-bg($form-file-button-bg);
+        pointer-events: none;
+        border-color: inherit;
+        border-style: solid;
+        border-width: 0;
+        border-inline-end-width: $input-border-width;
+        border-radius: 0;
+        @include transition($btn-transition);
+    }
+
+    &:hover:not(:disabled):not([readonly])::file-selector-button {
+        background-color: $form-file-button-hover-bg;
+    }
+
+    &::-webkit-file-upload-button {
+        padding: $input-padding-y $input-padding-x;
+        margin: (-$input-padding-y) (-$input-padding-x);
+        margin-inline-end: $input-padding-x;
+        color: $form-file-button-color;
+        @include gradient-bg($form-file-button-bg);
+        pointer-events: none;
+        border-color: inherit;
+        border-style: solid;
+        border-width: 0;
+        border-inline-end-width: $input-border-width;
+        border-radius: 0;
+        @include transition($btn-transition);
+    }
+
+    &:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
+        background-color: $form-file-button-hover-bg;
+    }
+}
+
+$bootstrap-icons-font: "bootstrap-icons" !default;
+$bootstrap-icons-font-src: url('https://cdn.jsdelivr.net/npm/bootstrap-icons/font/fonts/bootstrap-icons.woff2?524846017b983fc8ded9325d94ed40f3')
+        format("woff2"),
+    url('https://cdn.jsdelivr.net/npm/bootstrap-icons/font/fonts/bootstrap-icons.woff?524846017b983fc8ded9325d94ed40f3')
+        format("woff") !default;
+
+@font-face {
+    font-family: $bootstrap-icons-font;
+    src: $bootstrap-icons-font-src;
+}
+
+.bi::before,
+[class^="bi-"]::before,
+[class*=" bi-"]::before {
+    display: inline-block;
+    font-family: $bootstrap-icons-font !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -0.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$bootstrap-icons-map: (
+    "x": "\f62a",
+    "bookmark": "\f1a2",
+    "chevron-left": "\f284",
+    "chevron-right": "\f285",
+);
+
+@each $name, $value in $bootstrap-icons-map {
+    .bi-#{$name}::before {
+        content: "#{$value}";
+    }
+}
