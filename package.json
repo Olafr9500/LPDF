@@ -1,6 +1,6 @@
 {
   "name": "lpdf",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "LPDF is a simple, lightweight PDF reader UI suitable for tablet use.",
   "main": "index.js",
   "directories": {
@@ -26,7 +26,7 @@
     "url": "git+https://github.com/Olafr9500/LPDF.git"
   },
   "keywords": [
-    "PDF","Reader","UI"
+    "PDF","Reader","UI", "pdf.js","pdfjs", "pdf-viewer"
   ],
   "author": "Olafr",
   "license": "ISC",
